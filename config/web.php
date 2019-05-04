@@ -52,6 +52,11 @@ $config = [
             ],
         ],
     ],
+    'modules' => [
+        'diary' => [
+            'class' => 'app\modules\diary\Module'
+        ]
+    ],
     'params' => $params,
 ];
 
