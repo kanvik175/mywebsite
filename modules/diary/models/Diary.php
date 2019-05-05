@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "diary".
  *
  * @property int $id
+ * @property string $name
  * @property string $date
  */
 class Diary extends \yii\db\ActiveRecord
@@ -26,7 +27,8 @@ class Diary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'safe'],
+            [['name'], 'string', 'max' => 100],
+            [['date'], 'date', 'format' => 'php:Y-m-d']
         ];
     }
 
@@ -37,6 +39,7 @@ class Diary extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'name' => 'Name',
             'date' => 'Date',
         ];
     }
