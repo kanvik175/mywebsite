@@ -5,20 +5,20 @@ namespace app\modules\diary\models;
 use Yii;
 
 /**
- * This is the model class for table "diary".
+ * This is the model class for table "diaryRecord".
  *
  * @property int $id
  * @property string $name
  * @property string $date
  */
-class Diary extends \yii\db\ActiveRecord
+class DiaryRecord extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * {@inheritdoc}d
      */
     public static function tableName()
     {
-        return 'diary';
+        return 'diaryRecord';
     }
 
     /**
@@ -42,5 +42,24 @@ class Diary extends \yii\db\ActiveRecord
             'name' => 'Name',
             'date' => 'Date',
         ];
+    }
+
+    /**
+     * Получение всех показателей за день
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndicators()
+    {
+        return $this->hasOne(Indicator::className(), ['id_diary' => 'id']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeight()
+    {
+        $indicators = $this->getIndicators()->one();
+        return $indicators->weight;
     }
 }

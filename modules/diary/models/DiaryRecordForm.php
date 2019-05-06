@@ -10,7 +10,7 @@ namespace app\modules\diary\models;
 
 use yii\base\Model;
 
-class NewRecordForm extends Model
+class DiaryRecordForm extends Model
 {
     public $name;
     public $date;
@@ -25,7 +25,7 @@ class NewRecordForm extends Model
 
     public function save()
     {
-        $diary = new Diary();
+        $diary = new DiaryRecord();
         $diary->name = $this->name;
         $diary->date = $this->date;
         return $diary->save();

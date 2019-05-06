@@ -14,10 +14,9 @@
     <table class="table">
     <?php foreach ($records as $record): ?>
         <tr>
-            <td><?= $record->name ?></td>
+            <td><?= Html::a($record->name, ['/diary/default/view', 'id' => $record->id]) ?></td>
             <td><?= $record->date ?></td>
         </tr>
     <?php endforeach; ?>
     </table>
-
 </div>
