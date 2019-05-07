@@ -55,6 +55,19 @@ class DiaryRecord extends \yii\db\ActiveRecord
     }
 
     /**
+     * Общая оценка дня
+     *
+     * @return mixed
+     */
+    public function getDayRate()
+    {
+        $indicators = $this->getIndicators()->one();
+        return $indicators->day_rate;
+    }
+
+    /**
+     * Вес
+     *
      * @return mixed
      */
     public function getWeight()
@@ -62,4 +75,27 @@ class DiaryRecord extends \yii\db\ActiveRecord
         $indicators = $this->getIndicators()->one();
         return $indicators->weight;
     }
+
+    /**
+     * Количество повторений при подтягивании
+     *
+     * @return mixed
+     */
+    public function getPullUp()
+    {
+        $indicators = $this->getIndicators()->one();
+        return $indicators->pull_up;
+    }
+
+    /**
+     * Сколько раз вышел из себя
+     *
+     * @return mixed
+     */
+    public function getNumMad()
+    {
+        $indicators = $this->getIndicators()->one();
+        return $indicators->num_mad;
+    }
+
 }
