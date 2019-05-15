@@ -12,6 +12,11 @@
         <tr>
             <td><?= $record->name ?></td>
         </tr>
+        <?php if (isset($record->day_rate)): ?>
+        <tr>
+            <td><?= $record->day_rate ?></td>
+        </tr>
+        <?php endif; ?>
         <tr>
             <td><?= $record->date ?></td>
         </tr>

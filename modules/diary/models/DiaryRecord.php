@@ -59,10 +59,10 @@ class DiaryRecord extends \yii\db\ActiveRecord
      *
      * @return mixed
      */
-    public function getDayRate()
+    public function getDay_Rate()
     {
-        $indicators = $this->getIndicators()->one();
-        return $indicators->day_rate;
+        $indicator = $this->getIndicators()->one();
+        return isset($indicator) ? $indicator->day_rate : null;
     }
 
     /**
@@ -72,8 +72,8 @@ class DiaryRecord extends \yii\db\ActiveRecord
      */
     public function getWeight()
     {
-        $indicators = $this->getIndicators()->one();
-        return $indicators->weight;
+        $indicator = $this->getIndicators()->one();
+        return $indicator->weight;
     }
 
     /**
@@ -81,10 +81,10 @@ class DiaryRecord extends \yii\db\ActiveRecord
      *
      * @return mixed
      */
-    public function getPullUp()
+    public function getPull_Up()
     {
-        $indicators = $this->getIndicators()->one();
-        return $indicators->pull_up;
+        $indicator = $this->getIndicators()->one();
+        return $indicator->pull_up;
     }
 
     /**
@@ -92,10 +92,10 @@ class DiaryRecord extends \yii\db\ActiveRecord
      *
      * @return mixed
      */
-    public function getNumMad()
+    public function getNum_Mad()
     {
-        $indicators = $this->getIndicators()->one();
-        return $indicators->num_mad;
+        $indicator = $this->getIndicators()->one();
+        return $indicator->num_mad;
     }
 
 }
