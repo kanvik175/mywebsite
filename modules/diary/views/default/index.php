@@ -16,6 +16,7 @@
         <tr>
             <td><?= Html::a($record->name, ['/diary/default/view', 'id' => $record->id]) ?></td>
             <td><?= $record->date ?></td>
+            <td><?= Html::a('Редактировать', ['/diary/default/edit'], ['class' => 'btn btn-warning']) ?></td>
         </tr>
     <?php endforeach; ?>
     </table>
