@@ -81,4 +81,17 @@ class DefaultController extends Controller
             'id' => $id
         ]);
     }
+
+    public function actionDelete($id)
+    {
+       $model = diaryRecord::findOne($id);
+
+       $success_delete = $model->delete();
+
+       $flash_message = $success_delete ? ['message' => 'Запись успешно удалена', 'error' => 0] :
+               ['message' => 'Что-то пошло не так', 'error' => 1];
+       Yii::$app->session->setFlash('message', $flash_message);
+
+       return $this->redirect('index');
+    }
 }

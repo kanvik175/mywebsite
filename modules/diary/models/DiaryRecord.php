@@ -98,4 +98,17 @@ class DiaryRecord extends \yii\db\ActiveRecord
         return $indicator->num_mad;
     }
 
+    /**
+     * @return bool
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+
+    public function delete()
+    {
+        $indicator = $this->getindicators()->one();
+        $success = $indicator->delete();
+        return $success && parent::delete();
+    }
+
 }
