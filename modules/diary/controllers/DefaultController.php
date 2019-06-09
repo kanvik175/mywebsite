@@ -20,7 +20,7 @@ class DefaultController extends Controller
     {
         $diary = new DiaryRecord();
         $records = $diary->find()->orderBy('date DESC')->all();
-        $flash_message = Yii::$app->session->getFlash('new_record');
+        $flash_message = Yii::$app->session->getFlash('message');
         return $this->render('index', [
             'flash_message' => $flash_message,
             'records' => $records
@@ -51,12 +51,34 @@ class DefaultController extends Controller
             $save = $model->save();
             $flash_message = $save ? ['message' => 'Запись успешно добавлена', 'error' => 0] :
                 ['message' => 'Что-то пошло не так', 'error' => 1];
-            Yii::$app->session->setFlash('new_record', $flash_message);
+            Yii::$app->session->setFlash('message', $flash_message);
             return $this->redirect('index');
         }
 
         return $this->render('new_record',[
             'model' => $model
+        ]);
+    }
+
+    public function actionEdit($id)
+    {
+        $model = DiaryRecord::findOne($id);
+        $form_model = new DiaryRecordForm();
+
+        $form_model->setProperties($model);
+
+        if (Yii::$app->request->isPost) {
+           $form_model->load(Yii::$app->request->post());
+           $save = $form_model->save($id);
+           $flash_message = $save ? ['message' => 'Запись успешно изменена', 'error' => 0] :
+               ['message' => 'Что-то пошло не так', 'error' => 1];
+           Yii::$app->session->setFlash('message', $flash_message);
+           return $this->redirect('index');
+        }
+
+        return $this->render('edit', [
+            'model' => $form_model,
+            'id' => $id
         ]);
     }
 }

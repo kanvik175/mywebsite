@@ -28,13 +28,14 @@ class DiaryRecordForm extends Model
     /**
      * Сохранение значений из формы в соответствующих моделях
      *
+     * @param id
      * @return bool
      */
 
-    public function save()
+    public function save($id = null)
     {
-        $diary = new DiaryRecord();
-        $indicator = new Indicator();
+        $diary = isset($id) ? DiaryRecord::findOne($id) : new DiaryRecord();
+        $indicator = isset($id) ? $diary->getIndicators()->one() : new Indicator();
 
         $diary->name = $this->name;
         $diary->date = $this->date;
@@ -45,5 +46,18 @@ class DiaryRecordForm extends Model
         $success_save = $success_save && $indicator->save();
 
         return $success_save;
+    }
+
+    /**
+     * Сохранение значений модели diaryRecord
+     *
+     * @param $diary_record
+     */
+
+    public function setProperties($diary_record)
+    {
+       $this->name = $diary_record->name;
+       $this->date = $diary_record->date;
+       $this->day_rate = $diary_record->day_rate;
     }
 }
