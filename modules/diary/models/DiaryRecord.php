@@ -107,7 +107,7 @@ class DiaryRecord extends \yii\db\ActiveRecord
     public function delete()
     {
         $indicator = $this->getindicators()->one();
-        $success = $indicator->delete();
+        $success = isset($indicator) ? $indicator->delete() : true;
         return $success && parent::delete();
     }
 

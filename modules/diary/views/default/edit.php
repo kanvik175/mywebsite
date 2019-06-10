@@ -19,6 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->input('text') ?>
     <?= $form->field($model, 'day_rate')->input('text') ?>
+    <?= $form->field($model, 'weight')->input('text') ?>
+    <?= $form->field($model, 'pull_up')->input('text') ?>
+    <?= $form->field($model, 'num_mad')->input('text') ?>
     <?= $form->field($model, 'date')->input('date') ?>
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
