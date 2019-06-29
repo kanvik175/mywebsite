@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'pull_up')->input('text') ?>
     <?= $form->field($model, 'num_mad')->input('text') ?>
     <?= $form->field($model, 'date')->input('date') ?>
-
+    <?= $form->field($model, 'image')->fileInput() ?>
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 
     <?php ActiveForm::end(); ?>
