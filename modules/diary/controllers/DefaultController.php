@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\modules\diary\models\DiaryRecord;
 use app\modules\diary\models\DiaryRecordForm;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `diary` module
@@ -48,6 +49,7 @@ class DefaultController extends Controller
 
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
+            $model->image = UploadedFile::getInstance($model, 'image');
             $save = $model->save();
             $flash_message = $save ? ['message' => 'Запись успешно добавлена', 'error' => 0] :
                 ['message' => 'Что-то пошло не так', 'error' => 1];
@@ -69,6 +71,7 @@ class DefaultController extends Controller
 
         if (Yii::$app->request->isPost) {
            $form_model->load(Yii::$app->request->post());
+           $form_model->image = UploadedFile::getInstance($form_model, 'image');
            $save = $form_model->save($id);
            $flash_message = $save ? ['message' => 'Запись успешно изменена', 'error' => 0] :
                ['message' => 'Что-то пошло не так', 'error' => 1];

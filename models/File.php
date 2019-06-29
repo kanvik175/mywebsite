@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\TypeObj;
 use Yii;
 
 /**
@@ -15,6 +16,11 @@ use Yii;
  */
 class File extends \yii\db\ActiveRecord
 {
+
+    const IMG_TYPE = 0;
+
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -55,5 +61,25 @@ class File extends \yii\db\ActiveRecord
     public static function find()
     {
         return new FileQuery(get_called_class());
+    }
+
+    public function getLocation()
+    {
+        return '/uploads/' . TypeObj::TYPE[$this->type_obj] . '/';
+    }
+
+    public function getName()
+    {
+        return date('d.m.Y_H:i') . '.' . $this->file->extension;
+    }
+
+    public function upload()
+    {
+        $webroot = Yii::getAlias('@webroot');
+        $this->file->saveAs($webroot . $this->getLocation() . $this->getName());
+        if (isset($this->name) && file_exists($webroot . $this->getLocation() . $this->name)) {
+            unlink($webroot . $this->getLocation() . $this->name);
+        }
+        $this->name = $this->getName();
     }
 }

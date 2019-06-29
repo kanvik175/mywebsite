@@ -2,6 +2,7 @@
 
 namespace app\modules\diary\models;
 
+use app\models\File;
 use Yii;
 
 /**
@@ -98,6 +99,18 @@ class DiaryRecord extends \yii\db\ActiveRecord
         return $indicator->num_mad;
     }
 
+    public function getFile()
+    {
+        return $this->hasOne(File::className(), ['id_obj' => 'id']);
+    }
+
+    public function getImage()
+    {
+        $file = $this->getFile()->one();
+        $image = isset($file) ? $file->getLocation() . $file->name : "";
+        return $image;
+    }
+
     /**
      * @return bool
      * @throws \Throwable
@@ -107,7 +120,8 @@ class DiaryRecord extends \yii\db\ActiveRecord
     public function delete()
     {
         $indicator = $this->getindicators()->one();
-        $success = isset($indicator) ? $indicator->delete() : true;
+        $file = $this->getFile()->one();
+        $success = isset($indicator, $file) ? $indicator->delete() && $file->delete() : true;
         return $success && parent::delete();
     }
 

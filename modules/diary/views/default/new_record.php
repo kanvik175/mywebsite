@@ -22,6 +22,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'weight')->input('text') ?>
     <?= $form->field($model, 'pull_up')->input('text') ?>
     <?= $form->field($model, 'num_mad')->input('text') ?>
+    <?= $form->field($model, 'num_mad')->input('text') ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
     <?= $form->field($model, 'date')->input('date') ?>
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
