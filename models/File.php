@@ -75,11 +75,23 @@ class File extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        $webroot = Yii::getAlias('@webroot');
-        $this->file->saveAs($webroot . $this->getLocation() . $this->getName());
-        if (isset($this->name) && file_exists($webroot . $this->getLocation() . $this->name)) {
-            unlink($webroot . $this->getLocation() . $this->name);
+        if (isset($this->file)) {
+            $webroot = Yii::getAlias('@webroot');
+            $this->file->saveAs($webroot . $this->getLocation() . $this->getName());
+            if (isset($this->name) && file_exists($webroot . $this->getLocation() . $this->name)) {
+                unlink($webroot . $this->getLocation() . $this->name);
+            }
+            $this->name = $this->getName();
         }
-        $this->name = $this->getName();
+    }
+
+    public function delete()
+    {
+        $webroot = Yii::getAlias('@webroot');
+        $file_name  = $webroot . $this->getLocation() . $this->name;
+        if (file_exists($file_name)) {
+            unlink($file_name);
+            return parent::delete();
+        }
     }
 }
